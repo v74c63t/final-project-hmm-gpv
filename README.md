@@ -3,6 +3,7 @@
 ###To Do List: ###
 
 - [ ] Check out U-Net ++
+- [ ] How to include Slurm (having trouble in hw03)
 - [ ] Find which data preprocessing functions from hw can be used for model(s)
 - [ ] Determine which satellites or whether we use the entire satellite dataset
 - [ ] Determine what findings we want
