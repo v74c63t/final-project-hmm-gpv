@@ -7,7 +7,7 @@
 - [ ] Find which data preprocessing functions from hw can be used for model(s)
 - [ ] Determine which satellites or whether we use the entire satellite dataset
 - [ ] Determine what findings we want
-- [ ] How to present findings
+- [ ] How to present findings (StreamLit? for frontend)
 
 ## NOTHING ABOVE IS CONCRETE ##
 
@@ -18,5 +18,9 @@
 - Finish hw 03
 - Do the pull request due today
 - Verify To-Do list
+
+- Overall, we want a plan to execute on for the final project so we have some direction (how much is hw03 worth for what we want?)
+- Then, figure out the pull request
+- Then, get help on hw03 (might move up in priority)
 
 
