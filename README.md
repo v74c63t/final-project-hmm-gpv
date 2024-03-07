@@ -15,10 +15,6 @@
 - Hw 01, 02
 
 ## What we want to do ##
-- Finish hw 03
-- Do the pull request due today
-- Verify To-Do list
-
 - Overall, we want a plan to execute on for the final project so we have some direction (how much is hw03 worth for what we want?)
 - Then, figure out the pull request
 - Then, get help on hw03 (might move up in priority)
