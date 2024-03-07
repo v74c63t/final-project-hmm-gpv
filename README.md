@@ -10,4 +10,13 @@
 - [ ] How to present findings
 
 ## NOTHING ABOVE IS CONCRETE ##
- 
+
+## What we've done ##
+- Hw 01, 02
+
+## What we want to do ##
+- Finish hw 03
+- Do the pull request due today
+- Verify To-Do list
+
+
