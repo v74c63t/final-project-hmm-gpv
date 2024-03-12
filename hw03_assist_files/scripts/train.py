@@ -16,8 +16,8 @@ from pytorch_lightning.callbacks import (
 )
 
 
-from src.esd_data.datamodule import ESDDataModule
-from src.models.supervised.satellite_module import ESDSegmentation
+from hw02_assist_files.esd_data.datamodule import ESDDataModule
+from hw03_assist_files.models.supervised.satellite_module import ESDSegmentation
 
 import wandb
 from lightning.pytorch.loggers import WandbLogger

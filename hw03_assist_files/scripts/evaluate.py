@@ -17,10 +17,10 @@ from pytorch_lightning.callbacks import (
     RichModelSummary
 )
 
-from src.esd_data.datamodule import ESDDataModule
-from src.models.supervised.satellite_module import ESDSegmentation
-from src.preprocessing.subtile_esd_hw02 import Subtile
-from src.visualization.restitch_plot import (
+from hw02_assist_files.esd_data.datamodule import ESDDataModule
+from hw03_assist_files.models.supervised.satellite_module import ESDSegmentation
+from hw02_assist_files.preprocessing.subtile_esd_hw02 import Subtile
+from hw03_assist_files.visualization.restitch_plot import (
     restitch_eval,
     restitch_and_plot
 )
