@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Tuple
 import numpy as np
 import matplotlib.pyplot as plt
-from hw02_assist_files.preprocessing.subtile_esd_hw02 import TileMetadata, Subtile, restitch
+from dataset.preprocessing.subtile_esd_hw02 import TileMetadata, Subtile, restitch
 import matplotlib
 import torch
 import tifffile

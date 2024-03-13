@@ -4,10 +4,10 @@ from torch.optim import Adam
 from torch import nn
 import torchmetrics
 
-from hw03_assist_files.models.supervised.segmentation_cnn import SegmentationCNN
-from hw03_assist_files.models.supervised.unet import UNet
-from hw03_assist_files.models.supervised.resnet_transfer import FCNResnetTransfer
-from hw03_assist_files.models.supervised.UNetSqr import U2NET
+from models.supervised.segmentation_cnn import SegmentationCNN
+from models.supervised.unet import UNet
+from models.supervised.resnet_transfer import FCNResnetTransfer
+from models.supervised.UNetSqr import U2NET
 
 class ESDSegmentation(pl.LightningModule):
     """
