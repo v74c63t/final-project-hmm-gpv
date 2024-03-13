@@ -22,7 +22,7 @@ from dataset.preprocessing.preprocess_sat import (
 from dataset.preprocessing.file_utils import (
     load_satellite
 )
-from esd_data.augmentations import (
+from dataset.esd_data.augmentations import (
     AddNoise,
     Blur,
     RandomHFlip,

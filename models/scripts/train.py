@@ -1,7 +1,7 @@
 import pyprojroot
 import sys
 root = pyprojroot.here()
-sys.path.append(str(root))
+sys.path[0] = str(root)
 import pytorch_lightning as pl
 from argparse import ArgumentParser
 import os
