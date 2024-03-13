@@ -32,17 +32,17 @@
 
 ###To Do List: ###
 
-- [ ] Check out U-Net ++ (not anymore)
-- [ ] How to include Slurm (having trouble in hw03)
-- [ ] Find which data preprocessing functions from hw can be used for model(s)
+- [ ] Check out U-Net squared (U^2)
+- [ ] How to include Slurm (now just need to go through the document Hazel provided)
+- [ ] Find which data preprocessing functions from hw can be used for model(s) (it looks like we're just adapting hw 03 with a new model)
 - [ ] Determine which satellites or whether we use the entire satellite dataset
-- [ ] Determine what findings we want
-- [ ] How to present findings (StreamLit? for frontend)
+- [ ] Determine what findings we want (what kinds of loss functions to use?, which tiles to showcase as a visual)
+- [ ] How to present findings (Poster, show graphs)
 
 ## NOTHING ABOVE IS CONCRETE ##
 
 ## What we've done ##
-- Hw 01, 02
+- Hw 01, 02, 03
 
 ## What we want to do ##
 - Overall, we want a plan to execute on for the final project so we have some direction (how much is hw03 worth for what we want?)
