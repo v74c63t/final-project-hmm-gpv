@@ -7,7 +7,7 @@ import torchmetrics
 from hw03_assist_files.models.supervised.segmentation_cnn import SegmentationCNN
 from hw03_assist_files.models.supervised.unet import UNet
 from hw03_assist_files.models.supervised.resnet_transfer import FCNResnetTransfer
-from hw03_assist_files.models.supervised.u2net import U2Net
+from hw03_assist_files.models.supervised.UNetSqr import U2NET
 
 class ESDSegmentation(pl.LightningModule):
     """
@@ -41,8 +41,8 @@ class ESDSegmentation(pl.LightningModule):
             self.model = UNet(in_channels, out_channels, **model_params)
         elif model_type == "FCNResnetTransfer":
             self.model = FCNResnetTransfer(in_channels, out_channels, **model_params)
-        elif model_type == "U2Net":
-            self.model = U2Net(in_channels, out_channels, **model_params) #update params later
+        elif model_type == "U2NET":
+            self.model = U2NET(in_channels, out_channels, **model_params) #update params later
 
         # define performance metrics for segmentation task
         # such as accuracy per class accuracy, average IoU, per class IoU,
