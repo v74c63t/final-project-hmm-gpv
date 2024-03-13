@@ -26,13 +26,13 @@
   - Push comes to shove if we cannot find another model, just make frontend for hw03
  
 ### What we need to do ###
-- If using SAM: might need to experiment with tile sizes
 - ^ same ground truth, but might want to decide which satellites to use (ex: just sentinel - 2 and viirs, but have to customize in DATASET class)
   - Decide with team which satellite, which bands (need Viirs), and model
 
 ###To Do List: ###
 
 - [ ] Check out U-Net squared (U^2)
+- [ ] Build adapted version of U-Net squared
 - [ ] How to include Slurm (now just need to go through the document Hazel provided)
 - [ ] Find which data preprocessing functions from hw can be used for model(s) (it looks like we're just adapting hw 03 with a new model)
 - [ ] Determine which satellites or whether we use the entire satellite dataset
