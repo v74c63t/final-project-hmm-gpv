@@ -42,7 +42,7 @@ class ESDSegmentation(pl.LightningModule):
         elif model_type == "FCNResnetTransfer":
             self.model = FCNResnetTransfer(in_channels, out_channels, **model_params)
         elif model_type == "U2NET":
-            self.model = U2NET(in_channels, out_channels, **model_params) #update params later
+            self.model = U2NET(in_channels, out_channels) #update params later
 
         # define performance metrics for segmentation task
         # such as accuracy per class accuracy, average IoU, per class IoU,
