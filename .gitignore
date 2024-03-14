@@ -3,6 +3,15 @@ data/processed/*
 data/raw/Val/
 data/raw/zipfiles/*
 data/raw/Train/
+scripts/lightning_logs/
+scripts/wandb/
+models/*
+data/predictions/
+models/*
+.vscode/*
+wandb/
+lightning_logs/*
+*tif
 
 esdenv
 references/*
