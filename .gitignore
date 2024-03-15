@@ -5,13 +5,16 @@ data/raw/zipfiles/*
 data/raw/Train/
 scripts/lightning_logs/
 scripts/wandb/
-models/*
+models/U2NET
+models/SegmentationCNN
+models/UNet
+models/FCNResnetTransfer
 data/predictions/
-models/*
 .vscode/*
 wandb/
 lightning_logs/*
 *tif
+plots
 
 esdenv
 references/*
