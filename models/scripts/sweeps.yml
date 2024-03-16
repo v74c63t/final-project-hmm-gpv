@@ -1,0 +1,50 @@
+# hazel:  basically yml file shold have a structure like this:(find on wandb website)
+#         also this article may be helpful: https://wandb.ai/wandb_fc/articles/reports/Running-Hyperparameter-Sweeps-to-Pick-the-Best-Model--Vmlldzo1NDQ0OTIy
+# program: <insert>
+# method: <insert>
+# parameter:
+#   hyperparameter_name0:
+#     value: 0  
+#   hyperparameter_name1: 
+#     values: [0, 0, 0]
+#   hyperparameter_name: 
+#     distribution: <insert>
+#     value: <insert>
+#   hyperparameter_name2:  
+#     distribution: <insert>
+#     min: <insert>
+#     max: <insert>
+#     q: <insert>
+#   hyperparameter_name3: 
+#     distribution: <insert>
+#     values:
+#       - <list_of_values>
+#       - <list_of_values>
+#       - <list_of_values>
+# early_terminate:
+#   type: hyperband
+#   s: 0
+#   eta: 0
+#   max_iter: 0
+# command:
+# - ${Command macro}
+# - ${Command macro}
+# - ${Command macro}
+# - ${Command macro}      
+
+# here we're sweeping on learning rate, batch size, depth, n_encoders, and embedding size
+method: bayes
+metric:
+  name: val_loss
+  goal: minimize
+parameters:
+  learning_rate:
+    values: [1e-2, 1e-3, 1e-4]
+  batch_size:
+    values: [8, 16, 32]
+  depth:
+    values: [2, 3, 4]
+  n_encoders:
+    values: [1, 2, 3]
+  embedding_size:
+    values: [32, 64, 128]

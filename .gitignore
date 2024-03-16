@@ -3,10 +3,22 @@ data/processed/*
 data/raw/Val/
 data/raw/zipfiles/*
 data/raw/Train/
-data
+scripts/lightning_logs/
+scripts/wandb/
+models/U2NET
+models/SegmentationCNN
+models/UNet
+models/FCNResnetTransfer
+data/predictions/
+.vscode/*
+wandb/
+lightning_logs/*
+*tif
+plots
 
 esdenv
 references/*
+wandb/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

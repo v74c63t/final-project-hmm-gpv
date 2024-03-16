@@ -5,9 +5,9 @@ from typing import List
 import numpy as np
 import matplotlib.pyplot as plt
 # from ..preprocessing.file_utils import (load_satellite)
-from ..preprocessing.file_utils import Metadata
-from ..preprocessing.preprocess_sat import minmax_scale
-from ..preprocessing.preprocess_sat import (
+from dataset.preprocessing.file_utils import Metadata
+from dataset.preprocessing.preprocess_sat import minmax_scale
+from dataset.preprocessing.preprocess_sat import (
     preprocess_sentinel1,
     preprocess_sentinel2,
     preprocess_landsat,

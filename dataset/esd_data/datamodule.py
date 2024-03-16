@@ -12,17 +12,17 @@ from pathlib import Path
 from tqdm import tqdm
 import numpy as np
 from ..preprocessing.subtile_esd_hw02 import grid_slice
-from hw01_assist_files.preprocessing.preprocess_sat import (
+from dataset.preprocessing.preprocess_sat import (
     maxprojection_viirs,
     preprocess_viirs,
     preprocess_sentinel1,
     preprocess_sentinel2,
     preprocess_landsat,
 )
-from hw01_assist_files.preprocessing.file_utils import (
+from dataset.preprocessing.file_utils import (
     load_satellite
 )
-from esd_data.augmentations import (
+from dataset.esd_data.augmentations import (
     AddNoise,
     Blur,
     RandomHFlip,
@@ -32,7 +32,7 @@ from esd_data.augmentations import (
 from torchvision import transforms
 from copy import deepcopy
 from typing import List, Tuple, Dict
-from hw01_assist_files.preprocessing.file_utils import Metadata
+from dataset.preprocessing.file_utils import Metadata
 
 from sklearn.model_selection import train_test_split
 import pyprojroot
