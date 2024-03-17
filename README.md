@@ -121,3 +121,9 @@ python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 - Then, get help on hw03 (might move up in priority)
 </details>
 
+<details><summary>Sources of interest and citations</summary>
+
+- U^2 Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
+- U^2 Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
+
+</details>
