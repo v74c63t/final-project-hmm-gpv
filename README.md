@@ -4,29 +4,70 @@
 Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U-Net Squared to understand each of their performances on the satellite dataset. 
 
 ## Pipeline ##
-Completion of hw01 (data fetching and preprocessing), 02 (data preparing), and 03 (model trial and error) --> Researching for variant on the U-Net model and finding U-Net Squared --> Incorporating and breaking down for understanding the U-Net Squared model --> Running hyperparameter sweeps on U-Net and U-Net Squared --> Training best models found from sweeps --> Evaluating results of trained models.
+<img width="1149" alt="Screenshot 2024-03-17 at 3 09 31 PM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/53988f44-556b-4008-8da9-e2dc1dbc6fd4">
 
 ## Commands on getting started ##
-### Start Virtual Environment ###
-Mac/Linux: "esdenv/bin/activate"
-Windows: "esdenv/scripts/activate"
+### Setting up Virtual Environment ###
+1. Create a virtual environment:
+```
+python3 -m venv esdenv
+```
+2. Activate the virtual environment:
+   * On macOS and Linux:
+     ```
+     source esdenv/bin/activate
+     ```
+   * On Windows:
+     ```
+     .\esdenv\Scripts\activate
+     ```
+3. Install the required packages:
+    ```
+    pip install -r requirements.txt
+    ```
+
+To deactivate the virtual environment: 
+```
+deactivate
+```
 
 ### Training Models ###
 
-U-Net: python -m models.scripts.train --model_type=UNet --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
-* Remember to set the batch_size in train.py to "2"
+**U-Net**: 
+```
+python -m models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
+```
 
-U-Net Squared (variant Playfil_sweep_4): python -m models.scripts.train --model_type=U2Net --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
-U-Net Squared (variant Restful_sweep_9): python -m models.scripts.train --model_type=U2Net --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
-* Remember to set the batch_size in train.py to "2"
+*Note: Remember to set the batch_size in train.py to "2"*
+
+**U-Net Squared (variant Playfil_sweep_4)** : 
+```
+python -m models.scripts.train --model_type=U2Net --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
+```
+
+**U-Net Squared (variant Restful_sweep_9)** : 
+```
+python -m models.scripts.train --model_type=U2Net --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
+```
+
+*Note: Remember to set the batch_size in train.py to "2"*
 
 ### Evaluating Models ###
 
-U-Net: python -m models.scripts.evaluate --model_path=C:/Users/micha/Documents/UCI_W24/CS_175/hw03-segmentation-hmm-gpv/models/UNet/last.ckpt
+**U-Net**: 
+```
+python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+```
 
-U-Net Squared (variant Playfil_sweep_4): python -m models.scripts.evaluate
-U-Net Squared (variant Restful_sweep_9): python -m models.scripts.evaluate
+**U-Net Squared (variant Playfil_sweep_4)**: 
+```
+python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+```
 
+**U-Net Squared (variant Restful_sweep_9)**: 
+```
+python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+```
 
 <details>
   <summary> Behind the Scenes Planning on what to do</summary>
