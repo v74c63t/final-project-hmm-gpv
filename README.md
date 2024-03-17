@@ -9,9 +9,9 @@ Our project goes back to the default focus on this course, namely identification
 ## Commands on getting started ##
 ### Setting up Virtual Environment ###
 1. Create a virtual environment:
-```
-python3 -m venv esdenv
-```
+   ```
+   python3 -m venv esdenv
+   ```
 2. Activate the virtual environment:
    * On macOS and Linux:
      ```
