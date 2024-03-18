@@ -8,6 +8,7 @@ from models.supervised.segmentation_cnn import SegmentationCNN
 from models.supervised.unet import UNet
 from models.supervised.resnet_transfer import FCNResnetTransfer
 from models.supervised.UNetSqr import U2NET
+from models.supervised.U2Net_no_sigmoid import U2NETSig
 
 class ESDSegmentation(pl.LightningModule):
     """
@@ -41,8 +42,10 @@ class ESDSegmentation(pl.LightningModule):
             self.model = UNet(in_channels, out_channels, **model_params)
         elif model_type == "FCNResnetTransfer":
             self.model = FCNResnetTransfer(in_channels, out_channels, **model_params)
-        elif model_type == "U2NET":
+        elif model_type == "U2Net":
             self.model = U2NET(in_channels, out_channels) #update params later
+        elif model_type == "U2NetNoSigmoid":
+            self.model = U2NETSig(in_channels, out_channels)
 
         # define performance metrics for segmentation task
         # such as accuracy per class accuracy, average IoU, per class IoU,
