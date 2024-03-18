@@ -6,6 +6,8 @@ data/raw/Train/
 scripts/lightning_logs/
 scripts/wandb/
 models/U2NET
+models/U2Net
+models/U2NetNoSigmoid
 models/SegmentationCNN
 models/UNet
 models/FCNResnetTransfer
