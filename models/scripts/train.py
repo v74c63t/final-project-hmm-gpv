@@ -31,12 +31,12 @@ class ESDConfig:
     processed_dir: str | os.PathLike = root / 'data/processed/4x4'
     raw_dir: str | os.PathLike = root / 'data/raw/Train'
     selected_bands: None = None
-    model_type: str = "UNet"
+    model_type: str = "U2Net"
     tile_size_gt: int = 4
-    batch_size: int = 8
+    batch_size: int = 2
     max_epochs: int = 2
     seed: int = 12378921
-    learning_rate: float = 1e-3
+    learning_rate: float = 1e-4
     num_workers: int = 11
     accelerator: str = "cpu" #Switch to "gpu" for bigger runs (plz let us use ur gaming computer michelle) oki 
     devices: int = 1
