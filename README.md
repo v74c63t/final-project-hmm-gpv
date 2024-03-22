@@ -7,8 +7,8 @@ Our project goes back to the default focus on this course, namely identification
 <img width="1149" alt="Screenshot 2024-03-17 at 3 09 31 PM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/53988f44-556b-4008-8da9-e2dc1dbc6fd4">
 
 ## Getting Started ##
-### Setting up Virtual Environment ###
-1. Create a virtual environment:
+### Setting up the Virtual Environment ###
+1. Create the virtual environment:
    ```
    python3 -m venv esdenv
    ```
@@ -30,6 +30,13 @@ Our project goes back to the default focus on this course, namely identification
    ```
    deactivate
    ```
+
+### Setting up the Data ###
+
+* The dataset we are using is from the IEEE GRSS 2021 ESD dataset
+* Compile all the data into a single folder called `Train`
+* All the files assume that the data is placed under the [data/raw](/data/raw) directory so make sure to do that before running any files
+* The structure of the data should be `data/raw/Train/` with `Train` containing all the .tif files for each Tile
 
 ### Training Models ###
 
