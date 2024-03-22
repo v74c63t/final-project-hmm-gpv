@@ -45,11 +45,9 @@ class TileMetadata:
     # which makes the scaling factor between the parent and ground
     # truth 50x50 (parent pixel grouping) for every 1x1 (ground truth)
 
-    parent_tile_id: str  # Tile1, Tile2,... identifies Tile subdirectory
-    # in Train folder
+    parent_tile_id: str  # Tile1, Tile2,... identifies Tile subdirectory in Train folder
 
-    # Utility functions provided for generating JSON files. Do not edit unless
-    # you know what you are doing.
+    # Utility functions provided for generating JSON files. Do not edit unless you know what you are doing.
     def toJSON(self):
         # multitasking json.dump what default is doing is utilizing a lambda
         # function to convert dataclass to dict, then dict to json.
@@ -118,10 +116,6 @@ class Subtile:
         # Filenames should follow the format: 
         # <ParentTileDirectoryName>_<column>_<row>.npz
         # (ParentTileDirectoryName refers to Tile1, Tile2, etc.)
-        # Hint - You can use np.savez or np.save
-        
-        # print("Type: ", type(self.satellite_stack))
-        # print(self.satellite_stack)
         np.savez(dir / "subtiles" / f"{self.tile_metadata.parent_tile_id}_{self.tile_metadata.x_gt}_{self.tile_metadata.y_gt}.npz", **self.satellite_stack)
 
         # Save the tile_metadata as a JSON in the ~/data/processed/Train/<Parent_Tile_ID>/metadata
@@ -139,7 +133,6 @@ class Subtile:
         """
         Load the satellite stack and tile metadata from the directories
         """
-        # print('file: ', file_name)
         self.satellite_stack = dict(np.load(file_name))
         metadata_file_name = self.tile_filename_to_metadata_filename(file_name)
         self.tile_metadata = TileMetadata.loadJSON(metadata_file_name)
@@ -223,7 +216,7 @@ def tile_metadata_to_metadata(
         metadata_stack[satellite_type] = metadata
     return metadata_stack
 
-# -------------------Start Here ------------------------------ #
+
 def get_tile_ground_truth(
         gt_parent: np.ndarray,
         x_gt: int,
@@ -270,8 +263,6 @@ def get_tile_ground_truth(
     start_index_Y = size_gt[1]*y_gt
     end_index_X = size_gt[0] *(x_gt+1)
     end_index_Y = size_gt[1] *(y_gt+1)
-    # print(start_index_X)
-    # print(start_index_Y)
     # check to make sure the slice is within the bounds of
     # the ground truth parent image
     if not (0 <= start_index_X < gt_parent.shape[2]):
@@ -280,8 +271,6 @@ def get_tile_ground_truth(
         raise ValueError("Y dimension is not within bounds of gt_parent")
     copy_of_gt_parent = np.copy(gt_parent)
     # return the slice of the ground truth parent image
-    # print(gt_parent.shape)
-    # print(gt_parent)
     return copy_of_gt_parent[:,:,start_index_X:end_index_X, start_index_Y:end_index_Y]
 
 
@@ -333,8 +322,7 @@ def get_tile_satellite(
     # check if size_gt is an int, if so convert to a tuple
     if type(size_gt) == int:
         size_gt = (size_gt, size_gt)
-    # scale_factor = satellite.length / ground_truth.length NOT SURE IF WE NEED TO CALCULATE THIS OURSELVES
-    
+
     # calculate the start and end indices for the slice based
     # on the size_gt and the x and y coordinates
     start_index_X = scale_factor*size_gt[0]*x_sat
@@ -342,14 +330,14 @@ def get_tile_satellite(
     end_index_X = scale_factor*size_gt[0] *(x_sat+1)
     end_index_Y = scale_factor*size_gt[1] *(y_sat+1)
 
-    # Checking to make sure we're in bounds (ask if we need it)
+    # Checking to make sure we're in bounds
     if not (0 <= start_index_X < sat_parent.shape[2]):
         raise ValueError("X dimension is not within bounds of gt_parent")
     if not (0 <= start_index_Y < sat_parent.shape[3]):
         raise ValueError("Y dimension is not within bounds of gt_parent")
     copy_of_sat_parent = np.copy(sat_parent)
-    # return the slice of the satellite parent image
 
+    # return the slice of the satellite parent image
     return copy_of_sat_parent[:,:,start_index_X:end_index_X, start_index_Y:end_index_Y]
 
 
@@ -381,7 +369,6 @@ def grid_slice(
 
     tile_size_gt should be square and with respect to the ground truth image.
     """
-    scale_factor = 800//satellite_stack['gt'].shape[-1]
     if satellite_stack['gt'].shape[-1] % tile_size_gt != 0:
         raise ValueError("ground truth stack is not divisible by tile_size_gt")
     dimX_tiles_needed = satellite_stack['gt'].shape[-2]//tile_size_gt
@@ -396,30 +383,24 @@ def grid_slice(
             [m.file_name for m in metadata_stack[satellite_type]]
             )
 
-        parent_tile_id = metadata_stack[satellite_type][0].tile_id
-
     # instantiate subtiles list
     subtiles = []
     # iterate on every x and y subtile (2x for loops, one for dimX and other for dimY to get current slice)
     for x_index in range(dimX_tiles_needed):
         for y_index in range(dimY_tiles_needed):
-            # create tile
-            # for every satellite type
+            # create tile for every satellite type
             sat_tiles = {}
             for sat_type in satellite_stack:
                 # gt is a special case
                 if sat_type == 'gt':
                 # get the current slice for ground truth using get_tile_ground_truth
-                    # sat_slice_stack = {"gt": get_tile_ground_truth(satellite_stack[sat_type], x_index, y_index, tile_size_gt)}
                     sat_slice_stack = get_tile_ground_truth(satellite_stack[sat_type], x_index, y_index, tile_size_gt)
                     sat_tiles[sat_type] = sat_slice_stack
                 # otherwise use the get_tile_satellite function
                 else:
-                    # sat_slice_stack = {sat_type: get_tile_satellite(satellite_stack[sat_type], x_index, y_index, tile_size_gt, scale_factor)}
                     sat_slice_stack = get_tile_satellite(satellite_stack[sat_type], x_index, y_index, tile_size_gt)
                     sat_tiles[sat_type] = sat_slice_stack
 
-            # print("Type of sat_slice_stack: ", type(sat_slice_stack))
             # create the associated TileMetadata (metadata to tileMetadata)
             tileMetaDataContent = metadata_to_tile_metadata(metadata_stack, x_index, y_index, tile_size_gt)
             # instantiate Subtile with satellite_tiles and tile_metadata
@@ -461,9 +442,6 @@ def restitch(
             Stitched image, of shape (time, bands, width, height)
         satellite_metadata_from_subtile: List[List[TileMetadata]]
     """
-    # Consider np.concatenate -Michael
-    # dirNPArray = np.array(list(dir.glob("*.npz")))
-    # print(dirNPArray.shape)
     overallImage = []
     overallMetadata = []
     for x_index in range(range_x[0], range_x[1]):
@@ -473,15 +451,12 @@ def restitch(
             file_name = dir/ f"{tile_id}_{x_index}_{y_index}.npz"
             currentSubtile = Subtile().load(file_name)
             sat_stack = currentSubtile.satellite_stack[satellite_type]
-            # print(sat_stack.shape) (4,2,50,50)
             rowImage.append(sat_stack)
             rowMetadata.append(currentSubtile.tile_metadata)
         rowImage = np.concatenate(rowImage, axis=-1) # axis -1 since we are growing our # of columns if we concatenate a row of slices
         overallImage.append(rowImage)
         overallMetadata.append(rowMetadata)
-        # rowImageConCat = np.concatenate(rowImage, axis=0)
-        # overallImage.append(rowImageConCat)
-        # overallMetadata.append(rowMetadata)
     
     overallImage = np.concatenate(overallImage, axis=-2) # axis = -2 since we are growing our # of rows by combining all the rows.
+    
     return overallImage, overallMetadata
