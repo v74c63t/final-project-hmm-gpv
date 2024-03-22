@@ -10,8 +10,24 @@
 
 ### U-Net
 
+#### Tile 2 Prediction
 <img src='/model/prediction_images/U-Net/Tile2_restitched_visible_gt_prediction.png' alt='U-Net Tile 2 Prediction' />
 
--   **U-Net**: [/model/prediction_images/U-Net](/model/prediction_images/U-Net/)
--   **U<sup>2</sup>-Net Playful Sweep 4 Variant**: [/model/prediction_images/U2NetPlayfulSweep4](/model/prediction_images/U2NetPlayfulSweep4)
--   **U<sup>2</sup>-Net Restful Sweep 9 Variant**: [/model/prediction_images/U2NetRestfulSweep9](/model/prediction_images/U2NetRestfulSweep9)
+#### Tile 20 Prediction
+<img src='/model/prediction_images/U-Net/Tile20_restitched_visible_gt_prediction.png' alt='U-Net Tile 20 Prediction' />
+
+### U<sup>2</sup>-Net Playful Sweep 4 Variant
+
+#### Tile 2 Prediction
+<img src='/model/prediction_images/U2NetPlayfulSweep4/Tile2_restitched_visible_gt_prediction.png' alt='U^2-Net Playful Sweep 4 Variant Tile 2 Prediction' />
+
+#### Tile 20 Prediction
+<img src='/model/prediction_images/U2NetPlayfulSweep4/Tile20_restitched_visible_gt_prediction.png' alt='U^2-Net Playful Sweep 4 Variant Tile 20 Prediction' />
+
+### U<sup>2</sup>-Net Restful Sweep 9 Variant
+
+#### Tile 2 Prediction
+<img src='/model/prediction_images/U2NetRestfulSweep9/Tile2_restitched_visible_gt_prediction.png' alt='U^2-Net Restful Sweep 9 Variant Tile 2 Prediction' />
+
+#### Tile 20 Prediction
+<img src='/model/prediction_images/U2NetRestfulSweep9/Tile20_restitched_visible_gt_prediction.png' alt='U^2-Net Restful Sweep 9 Variant Tile 20 Prediction' />
