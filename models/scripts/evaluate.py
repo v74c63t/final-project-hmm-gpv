@@ -30,6 +30,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import tifffile
 import torch
+
 @dataclass
 class EvalConfig:
     processed_dir: str | os.PathLike = root / 'data/processed/4x4'
@@ -52,7 +53,6 @@ def main(options):
         options: EvalConfig
             options for the experiment
     """
-    # raise NotImplementedError # Complete this function using the code snippets below. Do not forget to remove this line.
     # Load datamodule
     datamodule = ESDDataModule(
         processed_dir=options.processed_dir,
@@ -76,43 +76,21 @@ def main(options):
         callbacks=[
             LearningRateMonitor(logging_interval='step'),
             ModelCheckpoint(dirpath=options.results_dir, save_top_k=1, monitor="val_loss"),
-            # RichProgressBar(), #Need to test
             RichModelSummary(max_depth=2)
         ]
         # ,gpus=1 if torch.cuda.is_available() else 0  # Assuming availability of GPU
     )
     # run the validation loop with trainer.validate
-    trainer.validate(model, datamodule=datamodule)  # UNCOMMENT
-    # run restitch_and_plot #something about hardcoding to a single tile and moving on in HW3 evaluate.py Comments
+    trainer.validate(model, datamodule=datamodule) 
+    # run restitch_and_plot
     restitch_and_plot(options, datamodule, model, "Tile1", rgb_bands=[4,3,2], image_dir=root/"plots")
     processed_val_dir = Path(options.processed_dir) / "Val" / "subtiles"
-    tiles = [tile for tile in processed_val_dir.iterdir()] # if tile.is_dir()]
+    tiles = [tile for tile in processed_val_dir.iterdir()] # if tile.is_dir()
     # for every subtile in options.processed_dir/Val/subtiles
-    processed_subtiles = set([os.path.basename(subtile).split("_")[0] for subtile in tiles]) # I made a set for the sake of restitch_eval and/or restitch_and_plot's parameter of parent_tile_id -Michael
-    print(options.processed_dir)
-    print(processed_val_dir)
+    processed_subtiles = set([os.path.basename(subtile).split("_")[0] for subtile in tiles]) 
+
     for subtile_parent_id in processed_subtiles: #tiles:
-        # print(subtile)
         restitch_and_plot(options, datamodule=datamodule, model=model, parent_tile_id=subtile_parent_id,image_dir=options.results_dir)
-        
-    # run restitch_eval on that tile followed by picking the best scoring class
-            # subtile_name = os.path.basename(subtile).split("_")[0] #
-            # restitch_eval(processed_val_dir, "sentinel2", subtile_parent_id, (0,4),(0,4),datamodule=datamodule, model=model)
-            # restitch_and_plot(options, datamodule=datamodule, model=model, parent_tile_id=subtile_parent_id,image_dir=root/"plots" )
-        
-            # print(subtile_name) #C:\Users\micha\Documents\UCI_W24\CS_175\hw03-segmentation-hmm-gpv\data\processed\4x4\Val\subtiles\Tile18_0_0.npz --> example
-    # save the file as a tiff using tifffile tifffile.imwrite()?
-    # save the file as a png using matplotlib plt.savefig() or smth
-   # tiles = ...
-
- # ---------------------------------------------------- UnComment Later --------------------------           
-    # for parent_tile_id in tiles:
-
-    #     # freebie: plots the predicted image as a jpeg with the correct colors
-    #     cmap = matplotlib.colors.LinearSegmentedColormap.from_list("Settlements", np.array(['#ff0000', '#0000ff', '#ffff00', '#b266ff']), N=4)
-    #     fig, ax = plt.subplots(nrows=1, ncols=1)
-    #     ax.imshow(y_pred, vmin=-0.5, vmax=3.5,cmap=cmap) 
-    #     plt.savefig(options.results_dir / f"{parent_tile_id}.png")
     
 
 if __name__ == '__main__':
