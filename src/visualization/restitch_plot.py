@@ -33,7 +33,7 @@ def restitch_and_plot(options, datamodule, model, parent_tile_id, satellite_type
     title = ['RGB Satellite Image', 'Ground Truth', 'Model Prediction']
     images = [X, y, xHat]
     
-    X = X[0]
+    X = X[0] # Getting a single time from stack of (time,band,width,height)
 
     # Plot for actual satellite image:
     X = np.dstack([X[3,:,:], X[2,:,:], X[1,:,:]])
@@ -58,7 +58,9 @@ def restitch_and_plot(options, datamodule, model, parent_tile_id, satellite_type
     if image_dir is None:
         plt.show()
     else:
+        # Save plots as png
         plt.savefig(Path(image_dir) / f"{parent_tile_id}_restitched_visible_gt_prediction.png")
+        # Write prediction to .tif file
         tifffile.imwrite(Path(image_dir) / f"{parent_tile_id}_restitched_visible_gt_prediction.tif", xHat[0])
         plt.close()
 

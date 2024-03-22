@@ -164,7 +164,7 @@ class ESDDataModule(pl.LightningDataModule):
             for parent_dir, _, _ in os.walk(self.raw_dir): 
                 parents.append(parent_dir)
            
-            parentsTrain, parentsVal = train_test_split(parents[1:], test_size=0.2, random_state=self.seed)
+            parentsTrain, parentsVal = train_test_split(parents[1:], test_size=0.2, random_state=self.seed) # To split the tiles into train and validation sets
 
             for parent_file in parentsTrain:
                 stack, metadata = self.__load_and_preprocess(parent_file)
