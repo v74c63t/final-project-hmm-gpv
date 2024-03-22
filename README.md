@@ -40,10 +40,12 @@ Our project goes back to the default focus on this course, namely identification
 
 ### Setting up the Data ###
 
-* The dataset we are using is from the IEEE GRSS 2021 ESD dataset
-* Compile all the data into a single folder called `Train`
+1. Download and compile all the data into a single folder called `Train`
+2. Place the `Train` folder under the [data/raw](/data/raw) directory. The structure of the data should be `data/raw/Train/` with `Train` containing multiple Tile folders that each contain .tif files.
+
+**Notes**
+* The dataset we are using is the IEEE GRSS 2021 ESD dataset
 * All the files assume that the data is placed under the [data/raw](/data/raw) directory so make sure to do that before running any files
-* The structure of the data should be `data/raw/Train/` with `Train` containing all the .tif files for each Tile
 
 ### Using Our Trained Models ###
 1. Navigate to the [model](/model) directory to find the links to each of our trained models in the README
@@ -59,13 +61,13 @@ Our project goes back to the default focus on this course, namely identification
 python -m src.models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
 ```
 
-**U<sup>2</sup>-Net (Playful_sweep_4 Variant)** : 
+**U<sup>2</sup>-Net (Playful Sweep 4 Variant)** : 
 
 ```
 python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
 ```
 
-**U<sup>2</sup>-Net (Restful_sweep_9 Variant)** : 
+**U<sup>2</sup>-Net (Restful Sweep 9 Variant)** : 
 ```
 python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
 ```
@@ -82,12 +84,12 @@ python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U<sup>2</sup>-Net (variant Playful_sweep_4)**: 
+**U<sup>2</sup>-Net (Playful Sweep 4 Variant)**: 
 ```
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U<sup>2</sup>-Net (variant Restful_sweep_9)**: 
+**U<sup>2</sup>-Net (Restful Sweep 9 Variant)**: 
 ```
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
