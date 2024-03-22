@@ -6,11 +6,11 @@ data/raw/Train/
 scripts/lightning_logs/
 scripts/wandb/
 # models/U2NET
-models/U2Net/*.ckpt
-models/U2NetNoSigmoid
-models/SegmentationCNN
-models/UNet
-models/FCNResnetTransfer
+model/U2Net
+model/U2NetNoSigmoid
+model/SegmentationCNN
+model/UNet
+model/FCNResnetTransfer
 data/predictions/U2Net/*.tiff
 data/predictions/U2NetNoSigmoid/*.tiff
 data/predictions/UNet/*.tiff
