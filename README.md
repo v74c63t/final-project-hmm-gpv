@@ -1,4 +1,4 @@
-# Semantic Segmentation for U-Net vs. U-Net Squared #
+# Semantic Segmentation for U-Net vs. U<sup>2</sup>-Net #
 
 ## Team *HMM gpV* Members ##
 - Michael Mui [@Wasabi-jpg](https://github.com/Wasabi-jpg)
@@ -7,7 +7,7 @@
 - Yihong(Hazel) Yu [@HazelYuAhiru](https://github.com/HazelYuAhiru)
 
 ## Project Overview ##
-Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U-Net Squared to understand each of their performances on the satellite dataset. 
+Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U<sup>2</sup>-Net to understand each of their performances on the satellite dataset. 
 
 ## ML Pipeline ##
 <img width="1000" alt="Screenshot 2024-03-22 at 1 14 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/d487ba77-c642-432e-a3da-2b1b78c30dc6">
@@ -52,13 +52,13 @@ Our project goes back to the default focus on this course, namely identification
 python -m src.models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
 ```
 
-**U-Net Squared (Playful_sweep_4 Variant)** : 
+**U<sup>2</sup>-Net (Playful_sweep_4 Variant)** : 
 
 ```
 python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
 ```
 
-**U-Net Squared (Restful_sweep_9 Variant)** : 
+**U<sup>2</sup>-Net (Restful_sweep_9 Variant)** : 
 ```
 python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
 ```
@@ -75,12 +75,12 @@ python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U-Net Squared (variant Playfil_sweep_4)**: 
+**U<sup>2</sup>-Net (variant Playfil_sweep_4)**: 
 ```
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U-Net Squared (variant Restful_sweep_9)**: 
+**U<sup>2</sup>-Net (variant Restful_sweep_9)**: 
 ```
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
