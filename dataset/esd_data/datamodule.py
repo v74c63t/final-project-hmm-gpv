@@ -45,11 +45,9 @@ def collate_fn(batch):
         Xs.append(X)
         ys.append(y)
         metadatas.append(metadata)
-
-    # Xs = np.stack(Xs)
-    # ys = np.stack(ys)
     
     return torch.stack(Xs), torch.stack(ys), metadatas
+
 
 class ESDDataModule(pl.LightningDataModule):
     """
@@ -77,19 +75,6 @@ class ESDDataModule(pl.LightningDataModule):
             tile_size_gt=4,
             batch_size=32,
             seed=12378921):
-       
-        # set transform to a composition of the following transforms:
-        # AddNoise, Blur, RandomHFlip, RandomVFlip, ToTensor
-       
-       
-        # utilize the RandomApply transform to apply each of the transforms 
-        # with a probability of 0.5
-       
-       """
-       First, need to store all params into a class of ESDDatamodule
-
-       Then, use RandomApply first, then Compose
-       """
 
        self.processed_dir = processed_dir
        self.raw_dir = raw_dir
@@ -99,19 +84,18 @@ class ESDDataModule(pl.LightningDataModule):
        self.seed = seed
        self.transform = None
 
+        # utilize the RandomApply transform to apply each of the transforms 
+        # with a probability of 0.5
        random_apply_AddNoise = transforms.RandomApply([AddNoise()], p=0.5)
        random_apply_Blur = transforms.RandomApply([Blur()], p=0.5)
        random_apply_RandomHFlip = transforms.RandomApply([RandomHFlip()], p=0.5)
        random_apply_RandomVFlip = transforms.RandomApply([RandomVFlip()], p=0.5)
-    #    random_apply_ToTensor = transforms.RandomApply([ToTensor()], p=0.5)
 
        # making composition
        self.transform = transforms.Compose([random_apply_AddNoise,random_apply_Blur, random_apply_RandomHFlip, random_apply_RandomVFlip, ToTensor()])
        self.prepare_data_per_node = False
        self.save_hyperparameters()
        self.allow_zero_length_dataloader_with_multiple_devices = False
-
-    #    raise NotImplementedError("DataModule __init__ function not implemented.")
     
     def __load_and_preprocess(
             self,
@@ -171,57 +155,24 @@ class ESDDataModule(pl.LightningDataModule):
         """
         # if the processed_dir does not exist, process the data and create
         # subtiles of the parent image to save
-        # print(self.raw_dir)
-        # if not os.path.exists(self.raw_dir): #doesn't exist if you don't download the zip from hw01
-            # fetch all the parent images in the raw_dir (download)
-            # print("Not there")
-            # for each parent image (each Tile in Train Dir) in the raw_dir
-            
         if not os.path.exists(self.processed_dir): 
             parents = []
             # fetch all the parent images in the raw_dir
             # go to directory where parent images live
             # then save all file paths into list
             # divide said list to a val set (0.2) and train set (0.8) split
-            # then per 
-            for parent_dir, _, _ in os.walk(self.raw_dir): #might need /Train
-                # print(parent_dir)
+            for parent_dir, _, _ in os.walk(self.raw_dir): 
                 parents.append(parent_dir)
-            # print(len(tiles)) 
-            
-            # ________________________________________________________________
-            # # for each parent image in the raw_dir
-            # for parent_file in parents:
-            #     # call __load_and_preprocess to load and preprocess the data for all satellite types
-            #     # print(tile)
-            #     stack, metadata = self.__load_and_preprocess(parent_file)
-            #     # print('finish loading and preprocessing')
-            #     # grid slice the data with the given tile_size_gt
-            #     # print('starting grid slice')
-            #     subtiles = grid_slice(stack, metadata, self.tile_size_gt) #do this before load and preprocess
-            #     # print('finish grid slice')
-            #     # print(len(subtiles))
-            #     # save each subtile (call Subtile().save(some params))
-                
-            #     # print('start saving subtiles')
-            #     for subtile in subtiles:
-            #         subtile.save(self.processed_dir)
-            #     # print(f'finish saving for {tile}')
-            # _________________________________________________________________
-            # New version for hw03 from what I assume:
-            print("Parents[1:]: ")
-            print(parents[1:])
+           
             parentsTrain, parentsVal = train_test_split(parents[1:], test_size=0.2, random_state=self.seed)
+
             for parent_file in parentsTrain:
-
                 stack, metadata = self.__load_and_preprocess(parent_file)
-
-                # print("Type of stack in datamodule before grid slice: ", type(stack))
 
                 subtiles = grid_slice(stack, metadata, self.tile_size_gt)
 
                 for subtile in subtiles:
-                    subtile.save(self.processed_dir / "Train") # decide with team the size of the tile to gt tile (4x4 means gt is a 4x4 sqr)
+                    subtile.save(self.processed_dir / "Train")
 
             for parent_file in parentsVal:
                 stack, metadata = self.__load_and_preprocess(parent_file)
@@ -231,8 +182,6 @@ class ESDDataModule(pl.LightningDataModule):
                 for subtile in subtiles:
                     subtile.save(self.processed_dir / "Val")
 
-
-    
     def setup(self, stage: str):
         """
             Create self.train_dataset and self.val_dataset.0000ff
@@ -244,11 +193,8 @@ class ESDDataModule(pl.LightningDataModule):
 
         generator = Generator().manual_seed(1024)
         
-        # data = DSE(f'{self.processed_dir}/subtiles', self.selected_bands, self.transform)
         self.train_dataset = DSE(f'{self.processed_dir}/Train/subtiles', self.selected_bands, self.transform)
         self.val_dataset = DSE(f'{self.processed_dir}/Val/subtiles', self.selected_bands, self.transform)
-        # self.train_dataset, self.val_dataset = random_split(data, [0.8, 0.2], generator)
-        # raise NotImplementedError("DataModule setup function not implemented.")
             
     def train_dataloader(self):
         """
@@ -264,7 +210,3 @@ class ESDDataModule(pl.LightningDataModule):
             self.val_dataset
         """
         return torch.utils.data.DataLoader(self.val_dataset, batch_size=self.batch_size, collate_fn=collate_fn)
-
-
-if __name__ == '__main__':
-    print("HELP")
