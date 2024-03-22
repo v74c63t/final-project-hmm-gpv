@@ -83,7 +83,7 @@ def main(options):
     # run the validation loop with trainer.validate
     trainer.validate(model, datamodule=datamodule) 
     # run restitch_and_plot
-    restitch_and_plot(options, datamodule, model, "Tile2", rgb_bands=[4,3,2], image_dir=root/"plots")
+    restitch_and_plot(options, datamodule, model, "Tile1", rgb_bands=[4,3,2], image_dir=root/"plots")
     processed_val_dir = Path(options.processed_dir) / "Val" / "subtiles"
     tiles = [tile for tile in processed_val_dir.iterdir()] # if tile.is_dir()
     # for every subtile in options.processed_dir/Val/subtiles
