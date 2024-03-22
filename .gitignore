@@ -5,18 +5,33 @@ data/raw/zipfiles/*
 data/raw/Train/
 scripts/lightning_logs/
 scripts/wandb/
-models/U2NET
-models/U2Net
-models/U2NetNoSigmoid
-models/SegmentationCNN
-models/UNet
-models/FCNResnetTransfer
-data/predictions/
+# models/U2NET
+model/U2Net
+model/U2NetNoSigmoid
+model/SegmentationCNN
+model/UNet
+model/FCNResnetTransfer
+data/predictions/U2Net/*.tif
+data/predictions/U2NetNoSigmoid/*.tif
+data/predictions/UNet/*.tif
+data/predictions/U2Net/*.png
+data/predictions/U2NetNoSigmoid/*.png
+data/predictions/UNet/*.png
 .vscode/*
 wandb/
 lightning_logs/*
-*tif
-plots
+# *tif
+# *.tiff
+# *.png
+plots/U2NetNoSigmoid/*.png
+plots/U2NetNoSigmoid/*.tif
+plots/U2Net_Playful_Sweep_4/*.png
+plots/U2Net_Playful_Sweep_4/*.tif
+plots/U2Net/*.png
+plots/U2Net/*.tif
+plots/*.png
+plots/*.tif
+
 
 esdenv
 references/*

@@ -1,0 +1,23 @@
+method: bayes
+metric:
+  name: Multi-Class Accuracy
+  goal: maximize
+parameters:
+  batch_size:
+    values: [2, 4] # can't be too large if you're running on CPU 
+  max_epochs:
+    values: [5, 7, 10] # can't be too large if you're running on CPU
+  learning_rate:
+    values: [1e-3, 1e-4, 1e-5]
+  depth:
+    values: [2, 3, 4]
+  n_encoders:
+    values: [2, 3, 4]
+  embedding_size:
+    values: [32, 64, 128]
+  pool_sizes:
+    values: ["4,4,2", "5,5,2"]
+  kernel_size:
+    values: [3, 5, 7]
+  scale_factor:
+    values: [25, 50, 75]

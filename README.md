@@ -1,14 +1,20 @@
-# Final Project for HMM gpV #
+# Semantic Segmentation for U-Net vs. U<sup>2</sup>-Net #
+
+## Team *HMM gpV* Members ##
+- Michael Mui [@Wasabi-jpg](https://github.com/Wasabi-jpg)
+- Michelle Sheu [@michellesheu](https://github.com/michellesheu)
+- Vanessa Tang [@v74c63t](https://github.com/v74c63t)
+- Yihong(Hazel) Yu [@HazelYuAhiru](https://github.com/HazelYuAhiru)
 
 ## Project Overview ##
-Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U-Net Squared to understand each of their performances on the satellite dataset. 
+Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U<sup>2</sup>-Net to understand each of their performances on the satellite dataset. 
 
-## Pipeline ##
-<img width="1149" alt="Screenshot 2024-03-17 at 3 09 31 PM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/53988f44-556b-4008-8da9-e2dc1dbc6fd4">
+## ML Pipeline ##
+<img width="1000" alt="Screenshot 2024-03-22 at 1 14 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/d487ba77-c642-432e-a3da-2b1b78c30dc6">
 
 ## Getting Started ##
-### Setting up Virtual Environment ###
-1. Create a virtual environment:
+### Setting up the Virtual Environment ###
+1. Create the virtual environment:
    ```
    python3 -m venv esdenv
    ```
@@ -22,52 +28,81 @@ Our project goes back to the default focus on this course, namely identification
      .\esdenv\Scripts\activate
      ```
 3. Install the required packages:
+
     ```
     pip install -r requirements.txt
     ```
 
-To deactivate the virtual environment: 
-```
-deactivate
-```
+4. To deactivate the virtual environment: 
+   ```
+   deactivate
+   ```
 
-### Training Models ###
+### Setting up the Data ###
+
+1. Download and compile all the data into a single folder called `Train`
+2. Place the `Train` folder under the [data/raw](/data/raw) directory. The structure of the data should be `data/raw/Train/` with `Train` containing multiple Tile folders that each contain .tif files.
+
+**Notes**
+* The dataset we are using is the IEEE GRSS 2021 ESD dataset
+* All the files assume that the data is placed under the [data/raw](/data/raw) directory so make sure to do that before running any files
+
+### Using Our Trained Models ###
+1. Navigate to the [model](/model) directory to find the links to each of our trained models in the README
+2. Click on the Google Drive link to the model and download the .ckpt file
+3. In the [model](/model) directory, create a folder for the model downloaded and place the .ckpt file in there
+   - If the U-Net model is downloaded, create a folder called `UNet`
+   - If one of the U<sup>2</sup>-Net model is downloaded, create a folder called `U2Net`
+
+### Training Your Own Models ###
 
 **U-Net**: 
 ```
-python -m models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
+python -m src.models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
 ```
 
-*Note: Remember to set the batch_size in train.py to "2"*
+**U<sup>2</sup>-Net (Playful Sweep 4 Variant)** : 
 
-**U-Net Squared (variant Playful_sweep_4)** : 
 ```
-python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
-```
-
-**U-Net Squared (variant Restful_sweep_9)** : 
-```
-python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
+python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
 ```
 
-*Note: Remember to set the batch_size in train.py to "2"*
+**U<sup>2</sup>-Net (Restful Sweep 9 Variant)** : 
+```
+python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
+```
+
+**Notes**
+* Before running training on any of the models, make sure the batch_size in [train.py](/src/models/scripts/train.py) is set to "2"
+* A Weights and Biases account is required to record all the metrics from training the model
+* When training is called, a folder named after the model will be created under the [model](/model) directory and the model itself will be placed in that folder
 
 ### Evaluating Models ###
 
 **U-Net**: 
 ```
-python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U-Net Squared (variant Playfil_sweep_4)**: 
+**U<sup>2</sup>-Net (Playful Sweep 4 Variant)**: 
 ```
-python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U-Net Squared (variant Restful_sweep_9)**: 
+**U<sup>2</sup>-Net (Restful Sweep 9 Variant)**: 
 ```
-python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
+
+**Notes**
+* `model_path` refers to the path to the model (the .ckpt file) created when [train.py](/src/models/scripts/train.py) is called
+* When [evaluate.py](/src/models/scripts/evaluate.py) is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
+* Depending on the model being evaluated, the [prediction/U-Net](/data/predictions/UNet) or the [prediction/U2Net](predictions/U2Net) directory will also populate with similar plots for all the tiles in the Validation dataset
+
+## Sources of Interests and Citations ##
+
+- U<sup>2</sup>-Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
+- U<sup>2</sup>-Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
 
 <details>
   <summary> Behind the Scenes Planning on what to do</summary>
@@ -119,11 +154,4 @@ python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 - Overall, we want a plan to execute on for the final project so we have some direction (how much is hw03 worth for what we want?)
 - Then, figure out the pull request
 - Then, get help on hw03 (might move up in priority)
-</details>
-
-<details><summary>Sources of Interest and Citations</summary>
-
-- U^2 Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
-- U^2 Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
-
 </details>
