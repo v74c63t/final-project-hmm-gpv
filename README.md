@@ -10,7 +10,7 @@
 Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U-Net Squared to understand each of their performances on the satellite dataset. 
 
 ## Pipeline ##
-<img width="1149" alt="Screenshot 2024-03-17 at 3 09 31 PM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/53988f44-556b-4008-8da9-e2dc1dbc6fd4">
+<img width="1098" alt="Screenshot 2024-03-22 at 1 04 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/b927575c-764e-44f8-9648-d32a25cf1ee7">
 
 ## Getting Started ##
 ### Setting up the Virtual Environment ###
@@ -28,6 +28,7 @@ Our project goes back to the default focus on this course, namely identification
      .\esdenv\Scripts\activate
      ```
 3. Install the required packages:
+
     ```
     pip install -r requirements.txt
     ```
