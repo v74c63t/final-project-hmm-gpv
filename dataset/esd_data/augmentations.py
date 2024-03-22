@@ -36,8 +36,6 @@ class Blur(object):
         self.kernel = kernel
 
     def __blur_method(self, x):
-        # print("Blur shape:")
-        # print(x.shape)
         return cv2.blur(x, (self.kernel, self.kernel))
 
     def __call__(self, sample: Dict[str, np.ndarray]) -> Dict[str, np.ndarray]:
@@ -57,34 +55,14 @@ class Blur(object):
         # sample must have X and y in a dictionary format
         if list(sample.keys()) != ['X', 'y']:
             raise ValueError("Sample must have X and y in a dictionary format")
-        # dimensions of img: (t, bands, tile_height, tile_width)
         # blur X
         x_img = sample['X']
-        # x_blur = []
-        # print(f'X_img shape BEFORE BLUR: {x_img.shape}')
         x_blurred = apply_per_band(x_img, self.__blur_method)
-        # for time in range(x_img.shape[0]):
-        #     time_stack = []
-        #     for band in range(x_img.shape[1]):
-        #         blurred_band = cv2.blur(x_img[time][band], (self.kernel, self.kernel))
-        #         print(f'x blurred_band shape: {blurred_band.shape}')
-        #         time_stack.append(blurred_band)
-        #     x_blur.append(time_stack)
-        
         # blur y
         y_img = sample['y']
-        # y_blur = []
-        # print(f'y_img shape BEFORE BLUR: {y_img.shape}')
         y_blurred = apply_per_band(y_img, self.__blur_method)
-        # for time in range(y_img.shape[0]):
-        #     time_stack = []
-        #     for band in range(y_img.shape[1]):
-        #         blurred_band = cv2.blur(y_img[time][band], (self.kernel, self.kernel))
-        #         time_stack.append(blurred_band)
-        #     y_blur.append(time_stack)
         
         return {'X': x_blurred, 'y': np.array(y_blurred)}
-        # return {'X': np.array(x_blur), 'y': np.array(y_blur)}
 
 
 class AddNoise(object):
@@ -138,11 +116,9 @@ class AddNoise(object):
 
         # add random noise to each pixel for x and y
         x_noise = x_img + np.random.normal(self.mean, rsd, x_img.shape)
-        # y_noise = y_img + np.random.normal(self.mean, rsd, y_img.shape)
 
         # clip the noise images
         x_clip = np.clip(x_noise, 0, 1)
-        # y_clip = np.clip(y_noise, 0, 1)
 
         return {'X': x_clip, 'y': y_img}
 
@@ -180,19 +156,12 @@ class RandomVFlip(object):
         # flip x
         x_flip = []
         for time in range(x_img.shape[0]):
-            # TODO: not sure if self.p should be used inside the loop or outside the loop
-            # print(f"Starting X shape BEFORE Vert flip: {x_img[time].shape}")
             if np.random.rand() < self.p:
                 flip_allband = cv2.flip(x_img[time], 0)
-                # print(f"CV2 VertiFlipped: {flip_allband.shape}")
             else:
                 flip_allband = x_img[time]
-                # print(f"NOT CV2 VertiFlipped: {flip_allband.shape}")
             x_flip.append(flip_allband)
         
-        # for item in x_flip:
-        #     print(f"X item shape: {item.shape}")
-
         # flip y
         y_flip = []
         for time in range(y_img.shape[0]):
@@ -202,11 +171,6 @@ class RandomVFlip(object):
                 flip_allband = y_img[time]
             y_flip.append(flip_allband)
 
-        # for item in x_flip:
-        #     print(f"X Vert item shape: {item.shape}")
-
-        # for itemY in y_flip:
-        #     print(f"y Vert item shape: {itemY.shape}")
         return {'X': np.stack(x_flip), 'y': np.stack(y_flip)}
 
 
@@ -243,33 +207,21 @@ class RandomHFlip(object):
         # flip x
         x_flip = []
         for time in range(x_img.shape[0]):
-            # print(f"Starting X shape BEFORE Hori flip: {x_img[time].shape}")
             if np.random.rand() < self.p:
                 flip_allband = cv2.flip(x_img[time], 1)
-                # print(f"CV2 HoriFlipped: {flip_allband.shape}")
             else:
                 flip_allband = x_img[time]
-                # print(f"NOT CV2 HoriFlipped: {flip_allband.shape}")
             x_flip.append(flip_allband)
         
         # flip y
         y_flip = []
         for time in range(y_img.shape[0]):
-            # print(f"Starting Y shape BEFORE Horiflip: {y_img[time].shape}")
             if np.random.rand() < self.p:
                 flip_allband = cv2.flip(y_img[time], 1)
-                # print(f"CV2 HoriFlipped YYY: {flip_allband.shape}")
             else:
                 flip_allband = y_img[time]
-                # print(f"NOT CV2 HoriFlipped YYY: {flip_allband.shape}")
             y_flip.append(flip_allband)
                 
-        # for item in x_flip:
-        #     print(f"X Hori item shape: {item.shape}")
-
-        # for itemY in y_flip:
-        #     print(f"y Hori item shape: {itemY.shape}")
-        
         return {'X': np.stack(x_flip), 'y': np.stack(y_flip)}
 
 
