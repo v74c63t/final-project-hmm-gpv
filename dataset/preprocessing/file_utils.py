@@ -32,6 +32,7 @@ class Metadata:
     bands: List[str]
     time: str
 
+
 def process_viirs_filename(filename: str) -> Tuple[str, str]:
     """
     This function takes in the filename of a VIIRS file and outputs
@@ -56,11 +57,6 @@ def process_viirs_filename(filename: str) -> Tuple[str, str]:
 
     return (match_obj.group(1), "0")
 
-    
-
-
-    raise NotImplementedError
-
 
 def process_s1_filename(filename: str) -> Tuple[str, str]:
     """
@@ -80,20 +76,11 @@ def process_s1_filename(filename: str) -> Tuple[str, str]:
     Tuple[str, str]
         A tuple containing the date and band.
     """
-    # lst_of_filename_components = filename.split('_')
-    # date_str = lst_of_filename_components[3]
-    # lst_of_filename_components = lst_of_filename_components[4].split('.')
-    # retTuple = (date_str, lst_of_filename_components[0])
-
-
-    # return (retTuple)
-
     name_of_file = Path(filename).name
     pattern = re.compile(r'S1A_IW_GRDH_(\d{8})_([A-Za-z]+)\.tif$')
     match_obj = pattern.search(str(name_of_file))
 
     return (match_obj.group(1), match_obj.group(2))
-    raise NotImplementedError
 
 
 def process_s2_filename(filename: str) -> Tuple[str, str]:
@@ -116,7 +103,6 @@ def process_s2_filename(filename: str) -> Tuple[str, str]:
     match_obj = pattern.search(str(name_of_file))
 
     return (match_obj.group(1), match_obj.group(2))
-    raise NotImplementedError
 
 
 def process_landsat_filename(filename: str) -> Tuple[str, str]:
@@ -142,8 +128,6 @@ def process_landsat_filename(filename: str) -> Tuple[str, str]:
 
     return (match_obj.group(1), match_obj.group(2))
 
-    raise NotImplementedError
-
 
 def process_ground_truth_filename(filename: str) -> Tuple[str, str]:
     """
@@ -164,9 +148,6 @@ def process_ground_truth_filename(filename: str) -> Tuple[str, str]:
         A tuple containing the date and band.
     """
     return ("0","0")
-    
-    raise NotImplementedError
-
 
 
 def load_satellite(
@@ -199,6 +180,7 @@ def load_satellite(
         satellite_type
         )
     return sat_data_stack, sat_filenames
+
 
 def get_satellite_files(tile_dir: Path, satellite_type: str) -> List[Path]:
     """
@@ -245,6 +227,7 @@ def get_filename_pattern(satellite_type: str) -> str:
     }
     return patterns[satellite_type]
 
+
 def get_grouping_function(satellite_type: str):
     """
     Return the function to group satellite files by date and band.
@@ -269,6 +252,7 @@ def get_grouping_function(satellite_type: str):
     }
     return grouping_functions[satellite_type]
 
+
 def read_satellite_files(sat_files: List[Path]) -> List[np.ndarray]:
     """
     Read satellite files into a list of numpy arrays.
@@ -289,6 +273,7 @@ def read_satellite_files(sat_files: List[Path]) -> List[np.ndarray]:
             sat_data = src.asarray().astype(np.float32)
             sat_data_list.append(sat_data)
     return sat_data_list
+
 
 def stack_satellite_data(
         sat_data: List[np.ndarray],
@@ -337,8 +322,7 @@ def stack_satellite_data(
         # Sort the group by band
         sorted_group = sorted(group)
 
-        # Extract the date and band, satellite data, and file names from the
-        # sorted group
+        # Extract the date and band, satellite data, and file names from the sorted group
         sorted_date_bands = [g[0] for g in sorted_group]
         grouped_sat_data = [g[1] for g in sorted_group]
 
