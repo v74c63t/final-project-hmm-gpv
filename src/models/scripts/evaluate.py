@@ -17,10 +17,10 @@ from pytorch_lightning.callbacks import (
     RichModelSummary
 )
 
-from dataset.esd_data.datamodule import ESDDataModule
-from models.supervised.satellite_module import ESDSegmentation
-from dataset.preprocessing.subtile_esd_hw02 import Subtile
-from visualization.restitch_plot import (
+from src.dataset.esd_data.datamodule import ESDDataModule
+from src.models.supervised.satellite_module import ESDSegmentation
+from src.dataset.preprocessing.subtile_esd_hw02 import Subtile
+from src.visualization.restitch_plot import (
     restitch_eval,
     restitch_and_plot
 )
@@ -41,7 +41,7 @@ class EvalConfig:
     batch_size: int = 8
     seed: int = 12378921
     num_workers: int = 11
-    model_path: str | os.PathLike = root / "models" / "U2Net" / "last.ckpt"
+    model_path: str | os.PathLike = root / "model" / "U2Net" / "last.ckpt"
 
 
 
@@ -83,7 +83,7 @@ def main(options):
     # run the validation loop with trainer.validate
     trainer.validate(model, datamodule=datamodule) 
     # run restitch_and_plot
-    restitch_and_plot(options, datamodule, model, "Tile1", rgb_bands=[4,3,2], image_dir=root/"plots")
+    restitch_and_plot(options, datamodule, model, "Tile2", rgb_bands=[4,3,2], image_dir=root/"plots")
     processed_val_dir = Path(options.processed_dir) / "Val" / "subtiles"
     tiles = [tile for tile in processed_val_dir.iterdir()] # if tile.is_dir()
     # for every subtile in options.processed_dir/Val/subtiles

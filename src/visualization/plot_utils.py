@@ -4,9 +4,9 @@ from pathlib import Path
 from typing import List
 import numpy as np
 import matplotlib.pyplot as plt
-from dataset.preprocessing.file_utils import Metadata
-from dataset.preprocessing.preprocess_sat import minmax_scale
-from dataset.preprocessing.preprocess_sat import (
+from src.dataset.preprocessing.file_utils import Metadata
+from src.dataset.preprocessing.preprocess_sat import minmax_scale
+from src.dataset.preprocessing.preprocess_sat import (
     preprocess_sentinel1,
     preprocess_sentinel2,
     preprocess_landsat,

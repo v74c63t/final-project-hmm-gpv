@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List, Tuple, Dict
 from dataclasses import dataclass
 from copy import deepcopy
-from dataset.preprocessing.file_utils import Metadata
+from src.dataset.preprocessing.file_utils import Metadata
 import json
 
 

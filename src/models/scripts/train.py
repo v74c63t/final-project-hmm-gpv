@@ -16,8 +16,8 @@ from pytorch_lightning.callbacks import (
 )
 
 
-from dataset.esd_data.datamodule import ESDDataModule
-from models.supervised.satellite_module import ESDSegmentation
+from src.dataset.esd_data.datamodule import ESDDataModule
+from src.models.supervised.satellite_module import ESDSegmentation
 
 import wandb
 from lightning.pytorch.loggers import WandbLogger
@@ -99,7 +99,7 @@ def train(options: ESDConfig):
     # RichModelSummary: shows a summary of the model before training (requires rich)
     callbacks = [
         ModelCheckpoint(
-            dirpath=root / 'models' / options.model_type,
+            dirpath=root / 'model' / options.model_type,
             filename='{epoch}-{val_loss:.2f}-{other_metric:.2f}',
             save_top_k=0,
             save_last=True,
