@@ -99,8 +99,8 @@ python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 
 ## Sources of Interests and Citations ##
 
-- U^2 Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
-- U^2 Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
+- U<sup>2</sup>-Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
+- U<sup>2</sup>-Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
 
 <details>
   <summary> Behind the Scenes Planning on what to do</summary>
