@@ -54,47 +54,6 @@ def main(options):
     """
     # raise NotImplementedError # Complete this function using the code snippets below. Do not forget to remove this line.
     # Load datamodule
-#     datamodule = ESDDataModule(
-#         data_dir=options.processed_dir,
-#         batch_size=options.batch_size,
-#         num_workers=options.num_workers,
-#         tile_size=options.tile_size_gt
-#     )
-#     datamodule.setup()
-#     # load model from checkpoint at options.model_path
-#     model = ESDSegmentation.load_from_checkpoint(checkpoint_path=str(options.model_path))
-#     # set the model to evaluation mode (model.eval())
-#     model.eval()
-#     # this is important because if you don't do this, some layers
-#     # will not evaluate properly
-
-#     # instantiate pytorch lightning trainer
-#     trainer = pl.Trainer(
-#         callbacks=[
-#             LearningRateMonitor(logging_interval='step'),
-#             ModelCheckpoint(dirpath=options.results_dir, save_top_k=1, monitor="val_loss"),
-#             RichProgressBar(),
-#             RichModelSummary(max_depth=2)
-#         ],
-#         gpus=1 if torch.cuda.is_available() else 0  # Assuming availability of GPU
-#     )
-#     # run the validation loop with trainer.validate
-#     trainer.validate(model, datamodule=datamodule)
-#     # run restitch_and_plot
-#     processed_val_dir = Path(options.processed_dir) / "Val" / "subtiles"
-#     tiles = [tile for tile in processed_val_dir.iterdir() if tile.is_dir()]
-#     # for every subtile in options.processed_dir/Val/subtiles
-#     # run restitch_eval on that tile followed by picking the best scoring class
-#     # save the file as a tiff using tifffile
-#     # save the file as a png using matplotlib
-#    # tiles = ...
-#     for parent_tile_id in tiles:
-
-#         # freebie: plots the predicted image as a jpeg with the correct colors
-#         cmap = matplotlib.colors.LinearSegmentedColormap.from_list("Settlements", np.array(['#ff0000', '#0000ff', '#ffff00', '#b266ff']), N=4)
-#         fig, ax = plt.subplots(nrows=1, ncols=1)
-#         ax.imshow(y_pred, vmin=-0.5, vmax=3.5,cmap=cmap)
-#         plt.savefig(options.results_dir / f"{parent_tile_id}.png")
     datamodule = ESDDataModule(
         processed_dir=options.processed_dir,
         raw_dir=options.raw_dir,
@@ -125,7 +84,6 @@ def main(options):
     # run the validation loop with trainer.validate
     trainer.validate(model, datamodule=datamodule)  # UNCOMMENT
     # run restitch_and_plot #something about hardcoding to a single tile and moving on in HW3 evaluate.py Comments
-    # ??
     restitch_and_plot(options, datamodule, model, "Tile1", rgb_bands=[4,3,2], image_dir=root/"plots")
     processed_val_dir = Path(options.processed_dir) / "Val" / "subtiles"
     tiles = [tile for tile in processed_val_dir.iterdir()] # if tile.is_dir()]
@@ -153,7 +111,7 @@ def main(options):
     #     # freebie: plots the predicted image as a jpeg with the correct colors
     #     cmap = matplotlib.colors.LinearSegmentedColormap.from_list("Settlements", np.array(['#ff0000', '#0000ff', '#ffff00', '#b266ff']), N=4)
     #     fig, ax = plt.subplots(nrows=1, ncols=1)
-    #     ax.imshow(y_pred, vmin=-0.5, vmax=3.5,cmap=cmap) #where do we even get y_pred
+    #     ax.imshow(y_pred, vmin=-0.5, vmax=3.5,cmap=cmap) 
     #     plt.savefig(options.results_dir / f"{parent_tile_id}.png")
     
 
@@ -167,8 +125,3 @@ if __name__ == '__main__':
                         help=".")
     parser.add_argument("--results_dir", type=str, default=config.results_dir, help="Results dir")
     main(EvalConfig(**parser.parse_args().__dict__))
-
-
-''' Notes:
-- I heard hw03 just needs one restitch image? but not too sure. something along the lines of running all 60 on the actual new model we try for ourselves
-'''

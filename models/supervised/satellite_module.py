@@ -52,10 +52,8 @@ class ESDSegmentation(pl.LightningModule):
         # per class AUC, average AUC, per class F1 score, average F1 score
         # these metrics will be logged to weights and biases
             
-        # FINISH METRICS LATER TODO AND FOCUS ON TRAINING AND VAL STEPS
         self.train_metrics = torchmetrics.MetricCollection({
             'accuracy': torchmetrics.Accuracy(task = 'multiclass', num_classes = 4),
-            #TODO: Add more metrics if needed
             'weighted_accuracy': torchmetrics.Accuracy(task='multiclass', num_classes=4, average='weighted'),
             'IoU': torchmetrics.JaccardIndex(task="multiclass", num_classes=4),
             'average_IoU': torchmetrics.JaccardIndex(task="multiclass", num_classes=4, average='weighted'),
@@ -63,10 +61,10 @@ class ESDSegmentation(pl.LightningModule):
             'average_AUC': torchmetrics.AUROC(task='multiclass', num_classes=4, average='weighted'),
             'f1_per_class' : torchmetrics.F1Score(task='multiclass',num_classes=4, average=None),
             'f1_score_weighted': torchmetrics.F1Score(task='multiclass',num_classes=4, average='weighted')
+            # Add more metrics if needed
         })
         self.val_metrics = torchmetrics.MetricCollection({
             'accuracy': torchmetrics.Accuracy(task='multiclass', num_classes=4),
-            #TODO: Add more metrics if needed
             'weighted_accuracy': torchmetrics.Accuracy(task='multiclass', num_classes=4, average='weighted'),
             'IoU': torchmetrics.JaccardIndex(task="multiclass", num_classes=4),
             'average_IoU': torchmetrics.JaccardIndex(task="multiclass", num_classes=4, average='weighted'),
@@ -74,6 +72,7 @@ class ESDSegmentation(pl.LightningModule):
             'average_AUC': torchmetrics.AUROC(task='multiclass', num_classes=4, average='weighted'),
             'f1_per_class' : torchmetrics.F1Score(task='multiclass',num_classes=4, average=None),
             'f1_score_weighted': torchmetrics.F1Score(task='multiclass',num_classes=4, average='weighted')
+            # Add more metrics if needed
         })
        
     
@@ -125,15 +124,13 @@ class ESDSegmentation(pl.LightningModule):
             train_loss: torch.tensor of shape (,) (i.e, a scalar tensor).
             Gradients will not propagate unless the tensor is a scalar tensor.
         """
-        sat_img, mask, metadata = batch
+        sat_img, mask, _ = batch
         sat_img = sat_img.to(torch.float32)
         squeezed_mask = torch.squeeze(mask).to(torch.int64)
         train_prediction = self.forward(sat_img)
-        # print(f"Train prediction shape: {train_prediction.shape}")
-        # print(f"Train squeeze mask shape: {squeezed_mask.shape}")
+
         train_loss = nn.CrossEntropyLoss()(train_prediction, squeezed_mask)
         
-        # TODO: log train_loss for W&B use
         self.log('Multi-Class Accuracy', self.train_metrics['accuracy'](train_prediction, squeezed_mask))
         self.log("Weighted Multi-Class Accuracy", self.train_metrics['weighted_accuracy'](train_prediction, squeezed_mask))
         self.log('Multi-Class AUC', self.train_metrics['AUC'](train_prediction, squeezed_mask))
@@ -177,18 +174,14 @@ class ESDSegmentation(pl.LightningModule):
             loss that will be tracked.
             Gradients will not propagate unless the tensor is a scalar tensor.
         """
-        # hazel: here we're basically doing the same as training_step but on the validation set?
-        #        not sure tho
 
-        sat_img, mask, metadata = batch
+        sat_img, mask, _ = batch
         sat_img = sat_img.to(torch.float32)
         squeezed_mask = torch.squeeze(mask).to(torch.int64)
         val_prediction = self.forward(sat_img)
-        # print(f"Val prediction shape: {val_prediction.shape}")
-        # print(f"Val squeeze mask shape: {squeezed_mask.shape}")
+
         val_loss = nn.CrossEntropyLoss()(val_prediction, squeezed_mask)
-        # TODO: save val_loss for W&B use
-        # self.log('val_loss', val_loss)
+
         self.log("Val Multi-Class Accuracy", self.val_metrics['accuracy'](val_prediction, squeezed_mask))
         self.log("Weighted Multi-Class Accuracy", self.val_metrics['weighted_accuracy'](val_prediction, squeezed_mask))
         self.log('Val Multi-Class AUC', self.val_metrics['AUC'](val_prediction, squeezed_mask))

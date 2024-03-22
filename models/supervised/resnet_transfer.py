@@ -65,6 +65,5 @@ class FCNResnetTransfer(nn.Module):
         
         
         x = self.model(x)
-        # print(x.keys())
         return self.pool_layer(x['out'])
 

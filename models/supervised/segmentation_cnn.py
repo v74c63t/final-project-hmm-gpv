@@ -112,21 +112,18 @@ class SegmentationCNN(nn.Module):
         self.pool_sizes = pool_sizes
         self.kernel_size = kernel_size
 
-        # print(f"Pool sizes: {self.pool_sizes}")
-        # print(f"Type for pool sizes: {type(self.pool_sizes)}")
 
         if type(self.pool_sizes) == str:
             self.pool_sizes = self.pool_sizes_convert(self.pool_sizes)
 
         encoders = [Encoder(in_channels=self.in_channels, out_channels=self.embedding_size, depth=self.depth, kernel_size=self.kernel_size, pool_size=self.pool_sizes[0])]
-        # self.embedding_size = self.embedding_size*2
 
         for i in range(1, len(self.pool_sizes)):
             encoders.append(Encoder(in_channels=self.embedding_size, out_channels=2*self.embedding_size, depth=self.depth, kernel_size=self.kernel_size, pool_size=self.pool_sizes[i]))
             self.embedding_size = self.embedding_size*2
 
         self.encoder = nn.ModuleList(encoders)
-        self.decoder = nn.Conv2d(self.embedding_size, self.out_channels, kernel_size = 1) #Figure out decoder
+        self.decoder = nn.Conv2d(self.embedding_size, self.out_channels, kernel_size = 1)
     
 
     def forward(self, X):

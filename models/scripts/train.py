@@ -38,7 +38,7 @@ class ESDConfig:
     seed: int = 12378921
     learning_rate: float = 1e-4
     num_workers: int = 11
-    accelerator: str = "cpu" #Switch to "gpu" for bigger runs (plz let us use ur gaming computer michelle) oki 
+    accelerator: str = "cpu" #Switch to "gpu" for bigger runs
     devices: int = 1
     in_channels: int = 99
     out_channels: int = 4
@@ -60,11 +60,6 @@ def train(options: ESDConfig):
             options for the experiment
     """
 
-    # options.selected_bands = {
-    #         'sentinel1': ['VV', 'VH'],
-    #         "viirs_maxproj": ["0"],
-    #         "gt": ["0"]
-    #         }
     # Initialize the weights and biases logger
     wandb.init(project="hw03", 
                entity="hmm-gpv",
@@ -80,9 +75,6 @@ def train(options: ESDConfig):
     datamodule.prepare_data()
     datamodule.setup("fit")
     
-    # train_dataloader = datamodule.train_dataloader()
-    # val_dataloader = datamodule.val_dataloader()
-    
     # create a dictionary with the parameters to pass to the models
     model_params = {
         "num_workers": options.num_workers,
@@ -92,7 +84,7 @@ def train(options: ESDConfig):
         "pool_sizes": options.pool_sizes,
         "kernel_size": options.kernel_size,
         "scale_factor": options.scale_factor
-    } # add in params
+    } 
 
     # initialize the ESDSegmentation module
     segmentationModule = ESDSegmentation(options.model_type, options.in_channels, options.out_channels, options.learning_rate, model_params)
@@ -123,13 +115,11 @@ def train(options: ESDConfig):
     # create a pytorch Trainer
     # see pytorch_lightning.Trainer
     # make sure to use the options object to load it with the correct options
-    # not too sure about the params 
     trainer = pl.Trainer(accelerator=options.accelerator, devices=options.devices, max_epochs=options.max_epochs, callbacks=callbacks, logger = wandb_logger) # need to look more at parameters
 
     # run trainer.fit
-    # not too sure about params
-    trainer.fit(segmentationModule, datamodule=datamodule) # need to look more at parameters
     # make sure to use the datamodule option
+    trainer.fit(segmentationModule, datamodule=datamodule)
 
     # wandb.finish()
 
