@@ -11,12 +11,17 @@ models/U2NetNoSigmoid
 models/SegmentationCNN
 models/UNet
 models/FCNResnetTransfer
-data/predictions/
+data/predictions/U2Net/*.tiff
+data/predictions/U2NetNoSigmoid/*.tiff
+data/predictions/U2Net/*.png
+data/predictions/U2NetNoSigmoid/*.png
 .vscode/*
 wandb/
 lightning_logs/*
 *tif
-plots
+*.tiff
+*.png
+
 
 esdenv
 references/*
