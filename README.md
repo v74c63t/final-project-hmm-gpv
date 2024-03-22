@@ -49,45 +49,45 @@ Our project goes back to the default focus on this course, namely identification
 
 **U-Net**: 
 ```
-python -m models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
+python -m src.models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epochs=5 --depth=2 --embedding_size=32 --kernel_size=7 --scale_factor=50
 ```
 
 **U-Net Squared (Playful_sweep_4 Variant)** : 
 
 ```
-python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
+python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
 ```
 
 **U-Net Squared (Restful_sweep_9 Variant)** : 
 ```
-python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
+python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=3 --embedding_size=32 --kernel_size=3 --scale_factor=25
 ```
 
 **Notes**
-* Before running training on any of the models, make sure the batch_size in [train.py](/models/scripts/train.py) is set to "2"
+* Before running training on any of the models, make sure the batch_size in [train.py](/src/models/scripts/train.py) is set to "2"
 * A Weights and Biases account is required to record all the metrics from training the model
-* When training is called, a folder named after the model will be created under the [models](/models) directory and the model itself will be placed in that folder
+* When training is called, a folder named after the model will be created under the [model](/model) directory and the model itself will be placed in that folder
 
 ### Evaluating Models ###
 
 **U-Net**: 
 ```
-python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
 **U-Net Squared (variant Playfil_sweep_4)**: 
 ```
-python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
 **U-Net Squared (variant Restful_sweep_9)**: 
 ```
-python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
+python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
 **Notes**
-* `model_path` refers to the path to the model (the .ckpt file) created when [train.py](/models/scripts/train.py) is called
-* When [evaluate.py](/models/scripts/evaluate.py) is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
+* `model_path` refers to the path to the model (the .ckpt file) created when [train.py](/src/models/scripts/train.py) is called
+* When [evaluate.py](/src/models/scripts/evaluate.py) is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
 * Depending on the model being evaluated, the [prediction/U-Net](/data/predictions/UNet) or the [prediction/U2Net](predictions/U2Net) directory will also populate with similar plots for all the tiles in the Validation dataset
 
 ## Sources of Interests and Citations ##
