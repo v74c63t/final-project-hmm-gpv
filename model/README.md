@@ -6,6 +6,6 @@
 
 # Here are our prediction images for our trained models
 
--   **U-Net**: [/model/prediction_images/U-Net]()
--   **U<sup>2</sup>-Net Playful Sweep 4 Variant**: [/model/prediction_images/U2NetPlayfulSweep4]()
--   **U<sup>2</sup>-Net Restful Sweep 9 Variant**: [/model/prediction_images/U2NetRestfulSweep9]()
+-   **U-Net**: [/model/prediction_images/U-Net](/model/prediction_images/U-Net)
+-   **U<sup>2</sup>-Net Playful Sweep 4 Variant**: [/model/prediction_images/U2NetPlayfulSweep4](/model/prediction_images/U2NetPlayfulSweep4)
+-   **U<sup>2</sup>-Net Restful Sweep 9 Variant**: [/model/prediction_images/U2NetRestfulSweep9](/model/prediction_images/U2NetRestfulSweep9)
