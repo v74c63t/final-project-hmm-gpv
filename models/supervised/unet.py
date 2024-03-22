@@ -32,8 +32,6 @@ class DoubleConvHelper(nn.Module):
         self.reLu = nn.ReLU()
         self.conv2 = nn.Conv2d(self.mid_channels, out_channels, kernel_size=3, padding=1) #padding = 1 if needed
         self.batchNorm2 = nn.BatchNorm2d(out_channels)
-        # raise NotImplementedError
-
 
     def forward(self, x):
         """Forward pass through the layers of the helper block"""
@@ -43,7 +41,6 @@ class DoubleConvHelper(nn.Module):
         x = self.conv2(x)
         x = self.batchNorm2(x)
         return x
-        # raise NotImplementedError
 
 
 class Encoder(nn.Module):
@@ -54,13 +51,11 @@ class Encoder(nn.Module):
         self.out_channels = out_channels
         self.maxPool = nn.MaxPool2d(kernel_size=2, padding=0)
         self.doubleConv = DoubleConvHelper(in_channels, out_channels)
-        # raise NotImplementedError
 
     def forward(self, x):
         x = self.maxPool(x)
         x = self.doubleConv(x)
         return x
-        # raise NotImplementedError
 
 
 class Decoder(nn.Module):
@@ -73,7 +68,6 @@ class Decoder(nn.Module):
         self.convTranspose = nn.ConvTranspose2d(self.in_channels, self.in_channels//2, kernel_size=2, stride=2)
 
         self.doubleConv = DoubleConvHelper(in_channels, out_channels) # Purposely doing double out_channels since I'm (Michael) assuming we're convTransposing then doubleConv-ing
-        # raise NotImplementedError
     
     def forward(self, x1, x2):
         """ 
@@ -106,7 +100,7 @@ class Decoder(nn.Module):
 
         # step 7: return output
         return DoubleConvHelper
-        # raise NotImplementedError
+
     
 class UNet(nn.Module):
     def __init__(self, in_channels: int, out_channels: int, n_encoders: int = 2,
@@ -176,7 +170,6 @@ class UNet(nn.Module):
         self.encoders = nn.ModuleList(encoders)
         self.decoders = nn.ModuleList(decoders)
         self.maxPooler = nn.MaxPool2d(kernel_size=scale_factor)
-        # raise NotImplementedError
 
 
     def forward(self, x):
@@ -209,5 +202,4 @@ class UNet(nn.Module):
             x = d(x, res)
         
         return self.maxPooler(x)
-        # raise NotImplementedError
 

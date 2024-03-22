@@ -43,8 +43,6 @@ class FCNResnetTransfer(nn.Module):
 
 
         self.pool_layer = nn.AvgPool2d(kernel_size=self.scale_factor)
-        # raise NotImplementedError
-
 
       
     def forward(self, x):
@@ -62,8 +60,6 @@ class FCNResnetTransfer(nn.Module):
             (batch, self.output_channels, width//self.scale_factor, height//self.scale_factor)
         """
         # Be careful of the output data structure of model you loaded (e.g. dict, tuple, etc.)
-        
-        
         x = self.model(x)
         return self.pool_layer(x['out'])
 
