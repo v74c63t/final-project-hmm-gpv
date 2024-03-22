@@ -26,10 +26,10 @@ Our project goes back to the default focus on this course, namely identification
     pip install -r requirements.txt
     ```
 
-To deactivate the virtual environment: 
-```
-deactivate
-```
+4. To deactivate the virtual environment: 
+   ```
+   deactivate
+   ```
 
 ### Training Models ###
 
@@ -41,9 +41,12 @@ python -m models.scripts.train --model_type=UNet --learning_rate=1e-5 --max_epoc
 *Note: Remember to set the batch_size in train.py to "2"*
 
 **U-Net Squared (variant Playful_sweep_4)** : 
+
 ```
 python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epochs=5 --depth=2 --embedding_size=128 --kernel_size=5 --scale_factor=50
 ```
+
+*Note: Remember to set the batch_size in train.py to "2"*
 
 **U-Net Squared (variant Restful_sweep_9)** : 
 ```
@@ -51,6 +54,9 @@ python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epo
 ```
 
 *Note: Remember to set the batch_size in train.py to "2"*
+
+* A Weights and Biases account is required to record all the metrics from training the model
+* When training is called, a folder named after the model will be created under the [models](/models) directory and the model itself will be placed in that folder
 
 ### Evaluating Models ###
 
@@ -68,6 +74,15 @@ python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
+
+* model_path refers to the path to the model (the .ckpt file) created when train.py is called
+* When evaluate.py is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
+* Depending on the model being evaluated, the [prediction/U-Net](/data/predictions/UNet) or the [prediction/U2Net](predictions/U2Net) directory will also populate with similar plots for all tiles in the Validation data
+
+## Sources of Interests and Citations ##
+
+- U^2 Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
+- U^2 Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
 
 <details>
   <summary> Behind the Scenes Planning on what to do</summary>
@@ -119,11 +134,4 @@ python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 - Overall, we want a plan to execute on for the final project so we have some direction (how much is hw03 worth for what we want?)
 - Then, figure out the pull request
 - Then, get help on hw03 (might move up in priority)
-</details>
-
-<details><summary>Sources of Interest and Citations</summary>
-
-- U^2 Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
-- U^2 Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
-
 </details>
