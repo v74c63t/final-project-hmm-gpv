@@ -45,7 +45,10 @@ Our project goes back to the default focus on this course, namely identification
 * All the files assume that the data is placed under the [data/raw](/data/raw) directory so make sure to do that before running any files
 * The structure of the data should be `data/raw/Train/` with `Train` containing all the .tif files for each Tile
 
-### Training Models ###
+### Using Our Trained Models ###
+#TODO
+
+### Training Your Own Models ###
 
 **U-Net**: 
 ```
@@ -68,14 +71,34 @@ python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max
 * A Weights and Biases account is required to record all the metrics from training the model
 * When training is called, a folder named after the model will be created under the [model](/model) directory and the model itself will be placed in that folder
 
-### Evaluating Models ###
+### Evaluating Our Trained Models ###
+
+**U-Net**: 
+```
+python -m src.models.scripts.evaluate --model_path=/INSERT_ROOT_DIR_HERE/model/UNet/unet.ckpt
+```
+
+**U<sup>2</sup>-Net (variant Playful_sweep_4)**: 
+```
+python -m src.models.scripts.evaluate --model_path=/INSERT_ROOT_DIR_HERE/model/U2Net/u2net_playful_sweep_4.ckpt
+```
+
+**U<sup>2</sup>-Net (variant Restful_sweep_9)**: 
+```
+python -m src.models.scripts.evaluate --model_path=/INSERT_ROOT_DIR_HERE/model/U2Net/u2net_restful_sweep_9.ckpt
+```
+
+**Notes**
+#TODO
+
+### Evaluating Your Own Models ###
 
 **U-Net**: 
 ```
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
-**U<sup>2</sup>-Net (variant Playfil_sweep_4)**: 
+**U<sup>2</sup>-Net (variant Playful_sweep_4)**: 
 ```
 python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
