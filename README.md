@@ -46,7 +46,11 @@ Our project goes back to the default focus on this course, namely identification
 * The structure of the data should be `data/raw/Train/` with `Train` containing all the .tif files for each Tile
 
 ### Using Our Trained Models ###
-#TODO
+1. Navigate to the [model](/model) directory to find the links to each of our trained models in the README
+2. Click on the Google Drive link to the model and download the .ckpt file
+3. In the [model](/model) directory, create a folder for the model downloaded and place the .ckpt file in there
+   - If the U-Net model is downloaded, create a folder called `UNet`
+   - If one of the U<sup>2</sup>-Net model is downloaded, create a folder called `U2Net`
 
 ### Training Your Own Models ###
 
@@ -71,27 +75,7 @@ python -m src.models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max
 * A Weights and Biases account is required to record all the metrics from training the model
 * When training is called, a folder named after the model will be created under the [model](/model) directory and the model itself will be placed in that folder
 
-### Evaluating Our Trained Models ###
-
-**U-Net**: 
-```
-python -m src.models.scripts.evaluate --model_path=/INSERT_ROOT_DIR_HERE/model/UNet/unet.ckpt
-```
-
-**U<sup>2</sup>-Net (variant Playful_sweep_4)**: 
-```
-python -m src.models.scripts.evaluate --model_path=/INSERT_ROOT_DIR_HERE/model/U2Net/u2net_playful_sweep_4.ckpt
-```
-
-**U<sup>2</sup>-Net (variant Restful_sweep_9)**: 
-```
-python -m src.models.scripts.evaluate --model_path=/INSERT_ROOT_DIR_HERE/model/U2Net/u2net_restful_sweep_9.ckpt
-```
-
-**Notes**
-#TODO
-
-### Evaluating Your Own Models ###
+### Evaluating Models ###
 
 **U-Net**: 
 ```
