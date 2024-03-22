@@ -9,8 +9,8 @@
 ## Project Overview ##
 Our project goes back to the default focus on this course, namely identification of locations in Africa that need electricity. To be able to identify those locations, we utilized sematic segmentation to accomplish this goal of ours, with our model theme based around the U-Net. We essentially compared the multi-class accuracy of the U-Net and the U-Net Squared to understand each of their performances on the satellite dataset. 
 
-## Pipeline ##
-<img width="1098" alt="Screenshot 2024-03-22 at 1 04 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/b927575c-764e-44f8-9648-d32a25cf1ee7">
+## ML Pipeline ##
+<img width="1000" alt="Screenshot 2024-03-22 at 1 14 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/d487ba77-c642-432e-a3da-2b1b78c30dc6">
 
 ## Getting Started ##
 ### Setting up the Virtual Environment ###
@@ -64,7 +64,7 @@ python -m models.scripts.train --model_type=U2Net --learning_rate=1e-4 --max_epo
 ```
 
 **Notes**
-* Before running training on any of the models, make sure the batch_size in train.py is set to "2"
+* Before running training on any of the models, make sure the batch_size in [train.py](/models/scripts/train.py) is set to "2"
 * A Weights and Biases account is required to record all the metrics from training the model
 * When training is called, a folder named after the model will be created under the [models](/models) directory and the model itself will be placed in that folder
 
@@ -86,9 +86,9 @@ python -m models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
 **Notes**
-* model_path refers to the path to the model (the .ckpt file) created when train.py is called
-* When evaluate.py is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
-* Depending on the model being evaluated, the [prediction/U-Net](/data/predictions/UNet) or the [prediction/U2Net](predictions/U2Net) directory will also populate with similar plots for all tiles in the Validation data
+* `model_path` refers to the path to the model (the .ckpt file) created when [train.py](/models/scripts/train.py) is called
+* When [evaluate.py](/models/scripts/evaluate.py) is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
+* Depending on the model being evaluated, the [prediction/U-Net](/data/predictions/UNet) or the [prediction/U2Net](predictions/U2Net) directory will also populate with similar plots for all the tiles in the Validation dataset
 
 ## Sources of Interests and Citations ##
 
