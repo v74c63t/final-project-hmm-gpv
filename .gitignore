@@ -5,16 +5,18 @@ data/raw/zipfiles/*
 data/raw/Train/
 scripts/lightning_logs/
 scripts/wandb/
-models/U2NET
-models/U2Net
+# models/U2NET
+models/U2Net/*.ckpt
 models/U2NetNoSigmoid
 models/SegmentationCNN
 models/UNet
 models/FCNResnetTransfer
 data/predictions/U2Net/*.tiff
 data/predictions/U2NetNoSigmoid/*.tiff
+data/predictions/UNet/*.tiff
 data/predictions/U2Net/*.png
 data/predictions/U2NetNoSigmoid/*.png
+data/predictions/UNet/*.png
 .vscode/*
 wandb/
 lightning_logs/*
