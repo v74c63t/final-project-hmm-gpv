@@ -12,11 +12,11 @@ Our project goes back to the default focus on this course, namely identification
 ## ML Pipeline ##
 <img width="1000" alt="Screenshot 2024-03-22 at 1 14 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/d487ba77-c642-432e-a3da-2b1b78c30dc6">
 
-## Item Locations ##
+## Structure ##
 - [Model Prediction Images](/model/prediction_images)
    - Prediction results from models
 - [Data Folder](/data)
-   - For users to place the dataset into (more information about this is in the `Setting up the Data` section below)
+   - For users to place the dataset into (more information about this is in the [Setting up the Data](#setting-up-the-data) section below)
 - [Model Folder](/model)
    - Description of our model results
    - It is also where the models are populated when they are created by [train.py](/src/models/scripts/train.py)
