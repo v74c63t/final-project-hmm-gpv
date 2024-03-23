@@ -14,11 +14,17 @@ Our project goes back to the default focus on this course, namely identification
 
 ## Item Locations ##
 - [Model Prediction Images](/model/prediction_images)
+   - Prediction results from models.
 - [Data Folder](/data)
+   - For users of our code, so that they don't have to make their own data folders.
 - [Model Folder](/model)
+   - Description of model results.
 - [Dataset Src](/src/dataset)
+   - Data managing/preprocessing code.
 - [Models Src](/src/models)
+   - Click "supervised" for model code. "Scripts" is for training and evaluating models.
 - [Visualization](/src/visualization)
+   - Code for making visualizations based on model functions.
 
 ## Getting Started ##
 ### Setting up the Virtual Environment ###
