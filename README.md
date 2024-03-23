@@ -106,6 +106,7 @@ python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 
 <details>
   <summary> Behind the Scenes Planning on what to do</summary>
+   
 ## 3/6/24 Team Focus Check In ##
 - Learnings from hw03
   - Adapting Dataset class and Datamodule to run train_test_split over parent images to ensure validation set subtiles can be restitched into a whole image
