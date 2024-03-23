@@ -12,6 +12,14 @@ Our project goes back to the default focus on this course, namely identification
 ## ML Pipeline ##
 <img width="1000" alt="Screenshot 2024-03-22 at 1 14 58 AM" src="https://github.com/cs175cv-w2024/final-project-hmm-gpv/assets/78942001/d487ba77-c642-432e-a3da-2b1b78c30dc6">
 
+## Item Locations ##
+- [Model Prediction Images](/model/prediction_images)
+- [Data Folder](/data)
+- [Model Folder](/model)
+- [Dataset Src](/src/dataset)
+- [Models Src](/src/models)
+- [Visualization](/src/visualization)
+
 ## Getting Started ##
 ### Setting up the Virtual Environment ###
 1. Create the virtual environment:
@@ -103,12 +111,6 @@ python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 
 - U<sup>2</sup>-Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
 - U<sup>2</sup>-Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf
-
-## Item Locations ##
-- [data images](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/model/prediction_images)
-- [dataset src](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/dataset)
-- [models src](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/models)
-- [visualization](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/visualization)
 
 
 <details>
