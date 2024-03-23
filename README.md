@@ -14,17 +14,19 @@ Our project goes back to the default focus on this course, namely identification
 
 ## Item Locations ##
 - [Model Prediction Images](/model/prediction_images)
-   - Prediction results from models.
+   - Prediction results from models
 - [Data Folder](/data)
-   - For users of our code, so that they don't have to make their own data folders.
+   - For users to place the dataset into (more information about this is in the `Setting up the Data` section below)
 - [Model Folder](/model)
-   - Description of model results.
+   - Description of our model results
+   - It is also where the models are populated when they are created by [train.py](/src/models/scripts/train.py)
 - [Dataset Src](/src/dataset)
-   - Data managing/preprocessing code.
+   - Data managing/preprocessing code
 - [Models Src](/src/models)
-   - Click "supervised" for model code. "Scripts" is for training and evaluating models.
+   - Click "[supervised](/src/models/supervised)" for model code
+   - "[Scripts](/src/models/scripts)" is for training and evaluating models
 - [Visualization](/src/visualization)
-   - Code for making visualizations based on model functions.
+   - Code for making visualizations based on model functions
 
 ## Getting Started ##
 ### Setting up the Virtual Environment ###
