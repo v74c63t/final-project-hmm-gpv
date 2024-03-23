@@ -102,7 +102,13 @@ python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ## Sources of Interests and Citations ##
 
 - U<sup>2</sup>-Net model code (thanks to xuebinqin): https://github.com/xuebinqin/U-2-Net/blob/master/model/u2net.py
-- U<sup>2</sup>-Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf 
+- U<sup>2</sup>-Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf
+
+## Item Locations ##
+- [dataset src](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/dataset)
+- [models src](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/models)
+- [visualization](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/visualization)
+
 
 <details>
   <summary> Behind the Scenes Planning on what to do</summary>
