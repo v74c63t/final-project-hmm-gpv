@@ -52,7 +52,7 @@ Our project goes back to the default focus on this course, namely identification
 2. Click on the Google Drive link to the model and download the .ckpt file
 3. In the [model](/model) directory, create a folder for the model downloaded and place the .ckpt file in there
    - If the U-Net model is downloaded, create a folder called `UNet`
-   - If one of the U<sup>2</sup>-Net model is downloaded, create a folder called `U2Net`
+   - If one of the U<sup>2</sup>-Net models is downloaded, create a folder called `U2Net`
 
 ### Training Your Own Models ###
 
@@ -95,7 +95,7 @@ python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 ```
 
 **Notes**
-* `model_path` refers to the path to the model (the .ckpt file) created when [train.py](/src/models/scripts/train.py) is called
+* `model_path` refers to the absolute path to the model (the .ckpt file) created when [train.py](/src/models/scripts/train.py) is called
 * When [evaluate.py](/src/models/scripts/evaluate.py) is called, the [plots](/plots) directory will populate with a plot of Tile 1's RGB satellite image, ground truth, and the model prediction
 * Depending on the model being evaluated, the [prediction/U-Net](/data/predictions/UNet) or the [prediction/U2Net](predictions/U2Net) directory will also populate with similar plots for all the tiles in the Validation dataset
 
