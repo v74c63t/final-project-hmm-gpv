@@ -105,6 +105,7 @@ python -m src.models.scripts.evaluate --model_path=INSERT_PATH_TO_MODEL
 - U<sup>2</sup>-Net model paper: https://arxiv.org/pdf/2005.09007v3.pdf
 
 ## Item Locations ##
+- [data images](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/model/prediction_images)
 - [dataset src](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/dataset)
 - [models src](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/models)
 - [visualization](https://github.com/cs175cv-w2024/final-project-hmm-gpv/tree/main/src/visualization)
